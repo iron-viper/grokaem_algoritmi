@@ -41,3 +41,4 @@ $end   = time();
 
 print_r($res);
 echo date("s", $end - $start) . " sec";
+
