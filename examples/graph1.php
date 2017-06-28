@@ -9,7 +9,7 @@ $graph["alice"]  = ["peggy"];
 $graph["claire"] = ["thom", "jonny"];
 $graph["anuj"]   = [];
 $graph["peggy"]  = [];
-$graph["thom"]    = [];
+$graph["thom"]   = [];
 $graph["jonny"]  = [];
 
 
@@ -24,12 +24,13 @@ function search($name, $graph)
     $searchQueue = array_merge($searchQueue, $graph[$name]);
     $searched    = [];
 
+    $step = 1;
     while (count($searchQueue) > 0) {
         $person = array_shift($searchQueue);
 
         if (!in_array($person, $searched)) {
             if (personIsSeller($person)) {
-                echo $person . " is mango seller!";
+                echo $person . " is mango seller! Steps: " . $step;
 
                 return true;
             }
@@ -37,13 +38,13 @@ function search($name, $graph)
             $searchQueue = array_merge($searchQueue, $graph[$person]);
             $searched[]  = $person;
         }
+        $step++;
     }
 
-    echo "The seller is not found.";
+    echo "The seller is not found. Steps: " . $step;
 
     return false;
 }
-
 
 search("you", $graph);
 
